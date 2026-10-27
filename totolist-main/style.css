@@ -1,0 +1,166 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #DDE3F0;
+    color: #24243A;
+}
+
+
+header {
+    position: relative;
+    min-height: 100px;
+    padding: 22px 30px;
+}
+
+header h1 {
+    margin: 0 0 5px;
+    font-size: 36px;
+    font-weight: 700;
+    color: #24243A;
+
+}
+
+header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #5C6075;
+
+}
+
+#logo {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    width: 80px;
+    height: auto;
+    object-fit: contain;
+
+}
+
+
+#accueil {
+    padding: 12px 20px 20px;
+    text-align: center;
+}
+
+#formulaire {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 45px;
+}
+
+#formulaire label {
+    font-size: 12px;
+    color: #000000;
+}
+
+#prenom {
+    width: 360px;
+    height: 52px;
+    padding: 0 12px;
+   border: 1px solid #000000;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    color: #000000;
+    font-family: inherit;
+    font-size: 16px;
+}
+#prenom::placeholder {
+    text-align: center;
+}
+
+#prenom:focus {
+    outline: 2px solid #5B45E8;
+    outline-offset: 2px;
+}
+
+button {
+    padding: 9px 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #5B45E8;
+    color: #FFFFFF;
+    font-family: inherit;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4938C5;
+}
+
+#presentation {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    gap: 60px;
+    width: 100%;
+    max-width: 680px;
+    margin: 55px auto 0;
+    padding: 0 20px;
+}
+
+#presentation article {
+    width: 300px;
+    height: 160px;
+    flex: 0 0 300px;
+    padding: 18px 12px;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 3px rgba(36, 36, 58, 0.12);
+border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#presentation article h2 {
+    margin: 0 0 8px;
+    font-size: 20px;
+    line-height: 1.4;
+    color: #000000;
+}
+
+#presentation article p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #000000;
+}
+
+footer {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px 15px;
+    color: #000000;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#formulaire button {
+    width: 263px;
+    height: 52px;
+    padding: 0;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+footer {
+    display: block;
+    position: relative;
+    margin-top: 20px !important;
+    padding: 12px 15px;
+    color: #000000;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mes tâches - TodoList</title>
+</head>
+
+<body>
+<img src="../logo.png" alt="Logo de TodoList">
+    <header>
+        <h1>Mes tâches</h1>
+        <h2>Organisez vos tâches simplement.</h2>
+        <p id="bienvenue"></p>
+    </header>
+
+    <main>
+
+        <section id="ajout-tache">
+
+            <h2>Nouvelle tâche</h2>
+
+            <form id="formulaire-tache">
+
+                <label for="nouvelle-tache">Nom de la tâche</label>
+
+                <input
+                    type="text"
+                    id="nouvelle-tache"
+                    name="nouvelle-tache"
+                    placeholder="Exemple : Faire les courses"
+                >
+
+                <button type="submit">Ajouter</button>
+
+            </form>
+
+        </section>
+
+        <section id="liste-taches">
+
+            <h2>Ma liste de tâches</h2>
+
+            <ul id="taches"></ul>
+
+        </section>
+
+        <button type="button" id="voir-statistiques">
+            Voir les statistiques
+        </button>
+
+    </main>
+<script src="taches.js"></script>
+</body>
+
+</html>
