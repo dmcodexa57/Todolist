@@ -6,12 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Mes tâches - TodoList</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-<img src="../logo.png" alt="Logo de TodoList">
+<img
+    id="logo"
+    src="../logo.png"
+    alt="Logo de TodoList"
+>
     <header>
-        <h1>Mes tâches</h1>
+        <h1>Mes tâches.</h1>
         <h2>Organisez vos tâches simplement.</h2>
         <p id="bienvenue"></p>
     </header>
@@ -30,10 +35,10 @@
                     type="text"
                     id="nouvelle-tache"
                     name="nouvelle-tache"
-                    placeholder="Exemple : Faire les courses"
+                    placeholder="Nouvelle tâche..."
                 >
 
-                <button type="submit">Ajouter</button>
+                <button type="submit">+ Ajouter</button>
 
             </form>
 
@@ -41,11 +46,25 @@
 
         <section id="liste-taches">
 
-            <h2>Ma liste de tâches</h2>
+            
+            <section id="details-tache" hidden>
+    <h2>Détails d'une tâche</h2>
+    <h3 id="titre-detail"></h3>
+    <p id="statut-detail"></p>
+    <button id="retour-taches">Retour aux tâches</button>
+    <button id="terminer-tache">
+    Marquer comme terminée
+    <button id="supprimer-tache">
+    Supprimer la tâche
+</button>
+</button>
+</section>
 
             <ul id="taches"></ul>
 
         </section>
+
+       
 
         <button type="button" id="voir-statistiques">
             Voir les statistiques

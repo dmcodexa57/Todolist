@@ -1,3 +1,8 @@
+
+/* ============================= */
+/* RÈGLES GÉNÉRALES */
+/* ============================= */
+
 * {
     box-sizing: border-box;
 }
@@ -9,6 +14,22 @@ body {
     color: #24243A;
 }
 
+/* LOGO IDENTIQUE SUR LES DEUX PAGES */
+
+#logo {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    width: 80px !important;
+    height: 80px !important;
+    object-fit: contain;
+    display: block;
+    margin: 0;
+}
+
+/* ============================= */
+/* HEADER */
+/* ============================= */
 
 header {
     position: relative;
@@ -21,26 +42,41 @@ header h1 {
     font-size: 36px;
     font-weight: 700;
     color: #24243A;
-
 }
 
 header h2 {
     margin: 0;
-    font-size: 20px;
+    font-size: 16px;
+    font-weight: normal;
     color: #5C6075;
-
 }
 
-#logo {
-    position: absolute;
-    top: 10px;
-    right: 30px;
-    width: 80px;
-    height: auto;
-    object-fit: contain;
-
+#bienvenue {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #24243A;
 }
 
+/* ============================= */
+/* BOUTONS GÉNÉRAUX */
+/* ============================= */
+
+button {
+    border: none;
+    border-radius: 8px;
+    background-color: #5B45E8;
+    color: #FFFFFF;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4938C5;
+}
+
+/* ============================= */
+/* PAGE ACCUEIL */
+/* ============================= */
 
 #accueil {
     padding: 12px 20px 20px;
@@ -61,17 +97,15 @@ header h2 {
 
 #prenom {
     width: 360px;
+    max-width: 100%;
     height: 52px;
     padding: 0 12px;
-   border: 1px solid #000000;
+    border: 1px solid #000000;
     border-radius: 8px;
     background-color: #FFFFFF;
-    color: #000000;
+    color: #24243A;
     font-family: inherit;
     font-size: 16px;
-}
-#prenom::placeholder {
-    text-align: center;
 }
 
 #prenom:focus {
@@ -79,24 +113,17 @@ header h2 {
     outline-offset: 2px;
 }
 
-button {
-    padding: 9px 16px;
-    border: none;
-    border-radius: 8px;
-    background-color: #5B45E8;
-    color: #FFFFFF;
-    font-family: inherit;
-    font-size: 11px;
-    cursor: pointer;
+#formulaire button {
+    width: 263px;
+    height: 52px;
 }
 
-button:hover {
-    background-color: #4938C5;
-}
+/* ============================= */
+/* PRÉSENTATION */
+/* ============================= */
 
 #presentation {
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: stretch;
     gap: 60px;
@@ -111,10 +138,9 @@ button:hover {
     height: 160px;
     flex: 0 0 300px;
     padding: 18px 12px;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: #FFFFFF;
     box-shadow: 0 2px 3px rgba(36, 36, 58, 0.12);
-border-radius: 8px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -125,42 +151,342 @@ border-radius: 8px;
 #presentation article h2 {
     margin: 0 0 8px;
     font-size: 20px;
-    line-height: 1.4;
     color: #000000;
 }
 
 #presentation article p {
     margin: 0;
     font-size: 14px;
-    line-height: 1.5;
     color: #000000;
 }
 
-footer {
-    display: block;
+/* ============================= */
+/* FORMULAIRE NOUVELLE TÂCHE */
+/* ============================= */
+
+#ajout-tache {
+    width: 700px;
+    max-width: calc(100% - 30px);
+    margin: 30px auto;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+#ajout-tache h2 {
+    display: none;
+}
+
+#formulaire-tache {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     width: 100%;
-    margin-top: 20px;
-    padding: 12px 15px;
-    color: #000000;
+}
+
+#formulaire-tache label {
+    display: none;
+}
+
+#nouvelle-tache {
+    width: 310px;
+    flex: 0 0 452px;
+    min-width: 0;
+    height: 45px;
+    padding: 0 12px;
+    border: 1px solid #C8CCDA;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    font-family: inherit;
+    font-size: 13px;
+}
+
+#nouvelle-tache:focus {
+    outline: 2px solid #5B45E8;
+    outline-offset: 2px;
+}
+
+#formulaire-tache button {
+    width: 87px;
+    min-width: 87px;
+    height: 45px;
     font-size: 14px;
+}
+
+/* ============================= */
+/* LISTE DES TÂCHES */
+/* ============================= */
+
+#liste-taches {
+    width: 700px;
+    max-width: calc(100% - 30px);
+    margin: 30px auto;
+    padding: 0;
+}
+
+#liste-taches > h2 {
+    margin: 0 0 20px;
+    font-size: 24px;
+    color: #24243A;
+}
+
+#taches {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Ligne carte + bouton */
+
+#taches .ligne-tache {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+    list-style: none;
+}
+
+/* Carte blanche */
+
+#taches .carte-tache {
+    flex: 1;
+    min-width: 0;
+    height: 75px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 6px rgba(36, 36, 58, 0.08);
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 3px;
+
+    text-align: left;
+}
+
+/* Titre de la tâche */
+
+#taches .carte-tache strong {
+    margin: 0;
+    font-size: 20px;
+    line-height: 24px;
+    color: #24243A;
+}
+
+/* Texte statut */
+
+#taches .carte-tache p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 20px;
+    color: #24243A;
+}
+
+/* Statut terminé */
+
+.statut-termine {
+    color: #16A34A;
+    font-size: 16px;
     font-weight: bold;
+}
+
+/* Statut à faire */
+
+.statut-encours {
+    color: #E99A24;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Bouton détails */
+
+#taches .ligne-tache > button {
+    width: 140px;
+    min-width: 140px;
+    height: 75px;
+    padding: 5px;
+    flex-shrink: 0;
+    font-size: 16px;
+}
+
+/* ============================= */
+/* DÉTAILS D'UNE TÂCHE */
+/* ============================= */
+
+#details-tache {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(36, 36, 58, 0.12);
     text-align: center;
 }
 
-#formulaire button {
-    width: 263px;
-    height: 52px;
-    padding: 0;
-    box-sizing: border-box;
-    flex-shrink: 0;
+#details-tache h2 {
+    font-size: 24px;
+    color: #24243A;
 }
-footer {
+
+#titre-detail {
+    margin: 25px 0;
+    font-size: 20px;
+}
+
+#statut-detail {
+    margin-bottom: 25px;
+    font-size: 15px;
+    color: #5C6075;
+}
+
+#details-tache button {
+    margin: 5px;
+    padding: 12px 18px;
+    font-size: 12px;
+}
+
+/* Bouton supprimer */
+
+#supprimer-tache {
+    background-color: #E34D59;
+}
+
+#supprimer-tache:hover {
+    background-color: #C93643;
+}
+
+/* Bouton retour */
+
+#retour-taches {
+    background-color: #74798C;
+}
+
+#retour-taches:hover {
+    background-color: #5C6075;
+}
+
+/* ============================= */
+/* STATISTIQUES */
+/* ============================= */
+
+#voir-statistiques {
     display: block;
-    position: relative;
-    margin-top: 20px !important;
+    width: 200px;
+    height: 45px;
+    margin: 30px 0 30px 30px;
+    font-size: 16px;
+}
+
+/* ============================= */
+/* FOOTER */
+/* ============================= */
+
+footer {
+    width: 100%;
+    margin-top: 20px;
     padding: 12px 15px;
     color: #000000;
     font-size: 12px;
     font-weight: bold;
     text-align: center;
+}
+
+/* ============================= */
+/* RESPONSIVE MOBILE */
+/* ============================= */
+
+@media screen and (max-width: 600px) {
+
+    header {
+        padding: 20px 15px;
+    }
+
+    header h1 {
+        font-size: 32px;
+    }
+
+    header h2 {
+        font-size: 16px;
+    }
+
+    #logo {
+        width: 80px;
+        right: 15px;
+        top: 15px;
+    }
+
+    #ajout-tache,
+    #liste-taches {
+        width: calc(100% - 30px);
+        max-width: none;
+    }
+
+    #formulaire-tache {
+        gap: 8px;
+    }
+
+    #nouvelle-tache {
+        flex: 1;
+        width: auto;
+        min-width: 0;
+    }
+
+    #formulaire-tache button {
+        width: 87px;
+        min-width: 87px;
+    }
+
+    #taches .ligne-tache {
+        gap: 8px;
+    }
+
+    #taches .carte-tache {
+        height: 75px;
+    }
+
+    #taches .carte-tache strong {
+        font-size: 16px;
+    }
+
+    #taches .carte-tache p {
+        font-size: 14px;
+    }
+
+    #taches .ligne-tache > button {
+        width: 100px;
+        min-width: 100px;
+        font-size: 16px;
+    }
+
+    #details-tache {
+        margin: 20px 15px;
+        padding: 20px;
+    }
+
+    #details-tache button {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    #presentation {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    #presentation article {
+        width: 100%;
+        max-width: 300px;
+        flex: none;
+    }
 }
