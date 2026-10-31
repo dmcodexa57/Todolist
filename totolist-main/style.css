@@ -1,8 +1,3 @@
-
-/* ============================= */
-/* RÈGLES GÉNÉRALES */
-/* ============================= */
-
 * {
     box-sizing: border-box;
 }
@@ -14,8 +9,6 @@ body {
     color: #24243A;
 }
 
-/* LOGO IDENTIQUE SUR LES DEUX PAGES */
-
 #logo {
     position: absolute;
     top: 10px;
@@ -26,10 +19,6 @@ body {
     display: block;
     margin: 0;
 }
-
-/* ============================= */
-/* HEADER */
-/* ============================= */
 
 header {
     position: relative;
@@ -57,9 +46,6 @@ header h2 {
     color: #24243A;
 }
 
-/* ============================= */
-/* BOUTONS GÉNÉRAUX */
-/* ============================= */
 
 button {
     border: none;
@@ -74,9 +60,6 @@ button:hover {
     background-color: #4938C5;
 }
 
-/* ============================= */
-/* PAGE ACCUEIL */
-/* ============================= */
 
 #accueil {
     padding: 12px 20px 20px;
@@ -118,9 +101,7 @@ button:hover {
     height: 52px;
 }
 
-/* ============================= */
-/* PRÉSENTATION */
-/* ============================= */
+
 
 #presentation {
     display: flex;
@@ -160,9 +141,8 @@ button:hover {
     color: #000000;
 }
 
-/* ============================= */
 /* FORMULAIRE NOUVELLE TÂCHE */
-/* ============================= */
+
 
 #ajout-tache {
     width: 700px;
@@ -213,9 +193,9 @@ button:hover {
     font-size: 14px;
 }
 
-/* ============================= */
+
 /* LISTE DES TÂCHES */
-/* ============================= */
+
 
 #liste-taches {
     width: 700px;
@@ -319,9 +299,9 @@ button:hover {
     font-size: 16px;
 }
 
-/* ============================= */
+
 /* DÉTAILS D'UNE TÂCHE */
-/* ============================= */
+
 
 #details-tache {
     max-width: 600px;
@@ -375,9 +355,9 @@ button:hover {
     background-color: #5C6075;
 }
 
-/* ============================= */
+
 /* STATISTIQUES */
-/* ============================= */
+
 
 #voir-statistiques {
     display: block;
@@ -387,9 +367,8 @@ button:hover {
     font-size: 16px;
 }
 
-/* ============================= */
 /* FOOTER */
-/* ============================= */
+
 
 footer {
     width: 100%;
@@ -401,9 +380,9 @@ footer {
     text-align: center;
 }
 
-/* ============================= */
+
 /* RESPONSIVE MOBILE */
-/* ============================= */
+
 
 @media screen and (max-width: 600px) {
 

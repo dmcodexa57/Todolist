@@ -1,8 +1,3 @@
-
-// ================================
-// ACCUEIL PERSONNALISÉ
-// ================================
-
 let prenom = localStorage.getItem("prenom");
 
 let bienvenue = document.querySelector("#bienvenue");
@@ -10,9 +5,9 @@ let bienvenue = document.querySelector("#bienvenue");
 bienvenue.textContent = "Bonjour " + prenom;
 
 
-// ================================
+
 // RÉCUPÉRER LA LISTE DES TÂCHES
-// ================================
+
 
 const listeTaches = document.getElementById("taches");
 
@@ -32,13 +27,12 @@ fetch("https://jsonplaceholder.typicode.com/todos")
 
         data.forEach(tache => {
 
-            // Créer une ligne pour contenir la carte et le bouton
             const ligne = document.createElement("li");
             ligne.classList.add("ligne-tache");
 
-            // ================================
-            // CRÉER LA CARTE BLANCHE
-            // ================================
+          
+            //CARTE BLANCHE
+          
 
             const element = document.createElement("div");
             element.classList.add("carte-tache");
@@ -46,9 +40,6 @@ fetch("https://jsonplaceholder.typicode.com/todos")
             const titre = document.createElement("strong");
             titre.textContent = tache.title;
 
-            // ================================
-            // CRÉER LE STATUT
-            // ================================
 
             const statut = document.createElement("p");
 
@@ -77,10 +68,9 @@ fetch("https://jsonplaceholder.typicode.com/todos")
             element.appendChild(titre);
             element.appendChild(statut);
 
-            // ================================
+          
             // BOUTON VOIR LES DÉTAILS
-            // ================================
-
+          
             const bouton = document.createElement("button");
             bouton.textContent = "Voir les détails";
 
@@ -126,12 +116,11 @@ fetch("https://jsonplaceholder.typicode.com/todos")
 
             });
 
-            // Ajouter la carte et le bouton dans la même ligne
+           
             ligne.appendChild(element);
             ligne.appendChild(bouton);
 
-            // Ajouter la ligne dans la liste
-            listeTaches.appendChild(ligne);
+             listeTaches.appendChild(ligne);
 
         });
 
@@ -142,9 +131,9 @@ fetch("https://jsonplaceholder.typicode.com/todos")
     });
 
 
-// ================================
+
 // BOUTON RETOUR AUX TÂCHES
-// ================================
+
 
 const retour = document.getElementById("retour-taches");
 
