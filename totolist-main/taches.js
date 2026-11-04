@@ -1,4 +1,5 @@
 
+// RÉCUPÉRER LE PRÉNOM
 
 let prenom = localStorage.getItem("prenom");
 
@@ -7,13 +8,87 @@ let bienvenue = document.querySelector("#bienvenue");
 bienvenue.textContent = "Bonjour " + (prenom || "");
 
 
-
 // RÉCUPÉRER LA LISTE DES TÂCHES
-
 
 const listeTaches = document.getElementById("taches");
 
-fetch("https://jsonplaceholder.typicode.com/todos")
+
+// FONCTION POUR AFFICHER UNE TÂCHE
+
+function afficherTache(tache) {
+
+    const ligne = document.createElement("li");
+    ligne.classList.add("ligne-tache");
+
+    // CARTE BLANCHE
+
+    const element = document.createElement("div");
+    element.classList.add("carte-tache");
+
+    // TITRE
+
+    const titre = document.createElement("strong");
+    titre.textContent = tache.text;
+
+    // STATUT
+
+    const statut = document.createElement("p");
+
+    const labelStatut = document.createElement("span");
+    labelStatut.textContent = "Statut : ";
+
+    const valeurStatut = document.createElement("span");
+
+    if (tache.is_complete) {
+
+        valeurStatut.textContent = "Terminée";
+        valeurStatut.className = "statut-termine";
+
+    } else {
+
+        valeurStatut.textContent = "À faire";
+        valeurStatut.className = "statut-encours";
+
+    }
+
+    statut.appendChild(labelStatut);
+    statut.appendChild(valeurStatut);
+
+    element.appendChild(titre);
+    element.appendChild(statut);
+
+
+    // BOUTON VOIR LES DÉTAILS
+
+    const bouton = document.createElement("button");
+
+    bouton.textContent = "Voir les détails";
+
+    bouton.addEventListener("click", function() {
+
+        localStorage.setItem(
+            "tacheSelectionnee",
+            JSON.stringify(tache)
+        );
+
+        window.location.href = "details.html";
+
+    });
+
+
+    // AJOUTER LES ÉLÉMENTS
+
+    ligne.appendChild(element);
+    ligne.appendChild(bouton);
+
+    listeTaches.appendChild(ligne);
+
+}
+
+
+// RÉCUPÉRER LES TÂCHES DEPUIS L'API
+
+fetch("http://localhost:3000/todos")
 
     .then(response => {
 
@@ -27,105 +102,11 @@ fetch("https://jsonplaceholder.typicode.com/todos")
 
     .then(data => {
 
-        data.forEach(tache => {
+        console.log("Données récupérées :", data);
 
-            const ligne = document.createElement("li");
-            ligne.classList.add("ligne-tache");
+        data[0].todolist.forEach(tache => {
 
-            // CARTE BLANCHE
-
-            const element = document.createElement("div");
-            element.classList.add("carte-tache");
-
-            const titre = document.createElement("strong");
-            titre.textContent = tache.title;
-
-            const statut = document.createElement("p");
-
-            const labelStatut = document.createElement("span");
-            labelStatut.textContent = "Statut : ";
-
-            const valeurStatut = document.createElement("span");
-
-            function actualiserStatut() {
-
-                if (tache.completed) {
-
-                    valeurStatut.textContent = "Terminée";
-                    valeurStatut.className = "statut-termine";
-
-                } else {
-
-                    valeurStatut.textContent = "À faire";
-                    valeurStatut.className = "statut-encours";
-
-                }
-
-            }
-
-            actualiserStatut();
-
-            statut.appendChild(labelStatut);
-            statut.appendChild(valeurStatut);
-
-            element.appendChild(titre);
-            element.appendChild(statut);
-
-            // BOUTON VOIR LES DÉTAILS
-
-            const bouton = document.createElement("button");
-            bouton.textContent = "Voir les détails";
-
-            bouton.addEventListener("click", function() {
-
-                const details = document.getElementById("details-tache");
-                const titreDetail = document.getElementById("titre-detail");
-                const statutDetail = document.getElementById("statut-detail");
-
-                details.hidden = false;
-
-                titreDetail.textContent = tache.title;
-
-                function actualiserDetail() {
-
-                    statutDetail.textContent = tache.completed
-                        ? "Statut : Terminée"
-                        : "Statut : À faire";
-
-                }
-
-                actualiserDetail();
-
-                // BOUTON TERMINER
-
-                const terminer = document.getElementById("terminer-tache");
-
-                terminer.onclick = function() {
-
-                    tache.completed = true;
-
-                    actualiserStatut();
-                    actualiserDetail();
-
-                };
-
-                // BOUTON SUPPRIMER
-
-                const supprimer = document.getElementById("supprimer-tache");
-
-                supprimer.onclick = function() {
-
-                    ligne.remove();
-                    details.hidden = true;
-
-                };
-
-            });
-
-            ligne.appendChild(element);
-            ligne.appendChild(bouton);
-
-            listeTaches.appendChild(ligne);
+            afficherTache(tache);
 
         });
 
@@ -136,20 +117,6 @@ fetch("https://jsonplaceholder.typicode.com/todos")
         console.log("Erreur :", error);
 
     });
-
-
-
-// BOUTON RETOUR AUX TÂCHES
-
-const retour = document.getElementById("retour-taches");
-
-retour.addEventListener("click", function() {
-
-    const details = document.getElementById("details-tache");
-
-    details.hidden = true;
-
-});
 
 
 // AJOUTER UNE NOUVELLE TÂCHE
@@ -171,96 +138,26 @@ formulaire.addEventListener("submit", function(event) {
 
     }
 
-    const ligne = document.createElement("li");
-    ligne.classList.add("ligne-tache");
+    const tache = {
 
-    // CARTE BLANCHE
+        text: texte,
+        is_complete: false
 
-    const element = document.createElement("div");
-    element.classList.add("carte-tache");
+    };
 
-    const titre = document.createElement("strong");
-    titre.textContent = texte;
-
-    const statut = document.createElement("p");
-
-    const labelStatut = document.createElement("span");
-    labelStatut.textContent = "Statut : ";
-
-    const valeurStatut = document.createElement("span");
-    valeurStatut.textContent = "À faire";
-    valeurStatut.className = "statut-encours";
-
-    statut.appendChild(labelStatut);
-    statut.appendChild(valeurStatut);
-
-    element.appendChild(titre);
-    element.appendChild(statut);
-
-    // BOUTON VOIR LES DÉTAILS
-
-    const bouton = document.createElement("button");
-    bouton.textContent = "Voir les détails";
-
-    bouton.addEventListener("click", function() {
-
-        const details = document.getElementById("details-tache");
-        const titreDetail = document.getElementById("titre-detail");
-        const statutDetail = document.getElementById("statut-detail");
-
-        details.hidden = false;
-
-        titreDetail.textContent = texte;
-
-        function actualiserDetail() {
-
-            statutDetail.textContent = valeurStatut.textContent === "Terminée"
-                ? "Statut : Terminée"
-                : "Statut : À faire";
-
-        }
-
-        actualiserDetail();
-
-        // BOUTON TERMINER
-
-        const terminer = document.getElementById("terminer-tache");
-
-        terminer.onclick = function() {
-
-            valeurStatut.textContent = "Terminée";
-
-            valeurStatut.classList.remove("statut-encours");
-            valeurStatut.classList.add("statut-termine");
-
-            actualiserDetail();
-
-        };
-
-        // BOUTON SUPPRIMER
-
-        const supprimer = document.getElementById("supprimer-tache");
-
-        supprimer.onclick = function() {
-
-            ligne.remove();
-            details.hidden = true;
-
-        };
-
-    });
-
-    // AJOUTER LES ÉLÉMENTS À LA LIGNE
-
-    ligne.appendChild(element);
-    ligne.appendChild(bouton);
-
-    // AJOUTER LA LIGNE À LA LISTE
-
-    listeTaches.appendChild(ligne);
-
-    // VIDER LE CHAMP
+    afficherTache(tache);
 
     nouvelleTache.value = "";
+
+});
+
+
+// BOUTON STATISTIQUES
+
+const boutonStatistiques = document.getElementById("voir-statistiques");
+
+boutonStatistiques.addEventListener("click", function() {
+
+    window.location.href = "statistiques.html";
 
 });
