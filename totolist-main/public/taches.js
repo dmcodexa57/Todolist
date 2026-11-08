@@ -1,7 +1,7 @@
 
-// =====================================
+
 // RÉCUPÉRER LE PRÉNOM
-// =====================================
+
 
 let prenom = localStorage.getItem("prenom");
 
@@ -11,18 +11,18 @@ if (bienvenue) {
     bienvenue.textContent = "Bonjour " + (prenom || "");
 }
 
-// =====================================
+
 // RÉCUPÉRER LA LISTE DES TÂCHES
-// =====================================
+
 
 const listeTaches = document.getElementById("taches");
 
 // Adresse de l'API Vercel
 const API_URL = "https://todolist-pied-alpha-78.vercel.app";
 
-// =====================================
+
 // FONCTION POUR AFFICHER UNE TÂCHE
-// =====================================
+
 
 function afficherTache(tache) {
 
@@ -92,9 +92,8 @@ function afficherTache(tache) {
 
 }
 
-// =====================================
 // RÉCUPÉRER LES TÂCHES DEPUIS L'API
-// =====================================
+
 
 fetch(API_URL + "/todos")
 
@@ -128,9 +127,9 @@ fetch(API_URL + "/todos")
 
     });
 
-// =====================================
+
 // AJOUTER UNE NOUVELLE TÂCHE
-// =====================================
+
 
 const formulaire = document.getElementById("formulaire-tache");
 
@@ -207,9 +206,9 @@ formulaire.addEventListener("submit", function(event) {
 
 });
 
-// =====================================
+
 // BOUTON STATISTIQUES
-// =====================================
+
 
 const boutonStatistiques = document.getElementById("voir-statistiques");
 

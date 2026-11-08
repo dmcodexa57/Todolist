@@ -1,20 +1,20 @@
 
-// =====================================
+
 // ADRESSE DE L'API VERCEL
-// =====================================
+
 
 const API_URL = "https://todolist-pied-alpha-78.vercel.app";
 
-// =====================================
+
 // RÉCUPÉRER L'IDENTIFIANT DANS L'URL
-// =====================================
+
 
 const parametres = new URLSearchParams(window.location.search);
 const id = parametres.get("id");
 
-// =====================================
+
 // RÉCUPÉRER LES ÉLÉMENTS HTML
-// =====================================
+
 
 const titreDetail = document.getElementById("titre-detail");
 const statutDetail = document.getElementById("statut-detail");
@@ -22,9 +22,8 @@ const terminer = document.getElementById("terminer-tache");
 const supprimer = document.getElementById("supprimer-tache");
 const retour = document.getElementById("retour-taches");
 
-// =====================================
 // VÉRIFIER SI UN IDENTIFIANT EXISTE
-// =====================================
+
 
 if (!id) {
 
@@ -32,9 +31,9 @@ if (!id) {
 
 } else {
 
-    // =====================================
+   
     // RÉCUPÉRER LA TÂCHE DEPUIS L'API
-    // =====================================
+   
 
     fetch(API_URL + "/todos/" + id)
 
@@ -73,9 +72,9 @@ if (!id) {
 
         });
 
-    // =====================================
+   
     // ACTUALISER LE STATUT
-    // =====================================
+   
 
     let tache;
 
@@ -101,9 +100,9 @@ if (!id) {
 
     }
 
-    // =====================================
+   
     // BOUTON TERMINER / RÉOUVRIR
-    // =====================================
+ 
 
     terminer.addEventListener("click", function() {
 
@@ -160,9 +159,9 @@ if (!id) {
 
     });
 
-    // =====================================
+    
     // BOUTON SUPPRIMER
-    // =====================================
+  
 
     supprimer.addEventListener("click", function() {
 
@@ -202,9 +201,9 @@ if (!id) {
 
     });
 
-    // =====================================
+    
     // BOUTON RETOUR
-    // =====================================
+  
 
     retour.addEventListener("click", function() {
 
