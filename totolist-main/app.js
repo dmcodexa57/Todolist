@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 const cors = require('cors');
+const path = require('path');
 
 // =====================================
 // CONFIGURATION SWAGGER
@@ -23,7 +24,7 @@ const options = {
             }
         ]
     },
-    apis: ['./app.js']
+    apis: [path.join(__dirname, 'app.js')]
 };
 
 const openapiSpecification = swaggerJsdoc(options);
