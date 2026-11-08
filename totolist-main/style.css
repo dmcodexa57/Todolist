@@ -299,86 +299,106 @@ button:hover {
     font-size: 16px;
 }
 
-
 /* DÉTAILS D'UNE TÂCHE */
 
-
 #details-tache {
-    max-width: 600px;
-    margin: 30px auto;
-    padding: 30px;
+    width: 450px;
+    max-width: calc(100% - 30px);
+    margin: 75px auto 30px;
+    padding: 16px 18px;
     background-color: #FFFFFF;
     border-radius: 12px;
     box-shadow: 0 3px 12px rgba(36, 36, 58, 0.12);
-    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+
+    text-align: left;
 }
 
 #details-tache h2 {
-    font-size: 24px;
+    margin: 0;
+    font-size: 16px;
     color: #24243A;
 }
 
 #titre-detail {
-    margin: 25px 0;
-    font-size: 20px;
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #24243A;
 }
 
 #statut-detail {
-    margin-bottom: 25px;
-    font-size: 15px;
+    margin: 0 0 4px;
+    font-size: 14px;
     color: #5C6075;
 }
 
+/* Boutons */
+
 #details-tache button {
-    margin: 5px;
-    padding: 12px 18px;
-    font-size: 12px;
+    width: 100%;
+    min-height: 37px;
+    margin: 0;
+    padding: 9px 12px;
+    border: none;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/* Bouton terminer */
+
+#terminer-tache {
+    background-color: #5B45E8;
+    color: #FFFFFF;
+}
+
+#terminer-tache:hover {
+    background-color: #4938C5;
 }
 
 /* Bouton supprimer */
 
 #supprimer-tache {
-    background-color: #E34D59;
+    background-color: #FEE2E2;
+    color: #FF3030;
 }
 
 #supprimer-tache:hover {
-    background-color: #C93643;
+    background-color: #FECACA;
 }
 
 /* Bouton retour */
 
 #retour-taches {
-    background-color: #74798C;
+    background-color: #F0F1F7;
+    color: #34344A;
 }
 
 #retour-taches:hover {
-    background-color: #5C6075;
+    background-color: #E0E2EC;
+}
+
+/* Responsive mobile */
+
+@media screen and (max-width: 600px) {
+    #details-tache {
+        width: calc(100% - 30px);
+        max-width: none;
+        margin: 45px auto 25px;
+        padding: 18px;
+    }
 }
 
 
-/* STATISTIQUES */
 
 
-#voir-statistiques {
-    display: block;
-    width: 200px;
-    height: 45px;
-    margin: 30px 0 30px 30px;
-    font-size: 16px;
-}
 
-/* FOOTER */
-
-
-footer {
-    width: 100%;
-    margin-top: 20px;
-    padding: 12px 15px;
-    color: #000000;
-    font-size: 12px;
-    font-weight: bold;
-    text-align: center;
-}
 
 
 /* RESPONSIVE MOBILE */
@@ -468,4 +488,28 @@ footer {
         max-width: 300px;
         flex: none;
     }
+}
+
+/* STATISTIQUES */
+
+#voir-statistiques {
+    display: block;
+    width: 200px;
+    height: 45px;
+    margin: 30px 0 30px 30px;
+    font-size: 16px;
+}
+
+/* Couleurs des statuts sur la page détails */
+
+#statut-detail.statut-termine {
+    color: #16A34A !important;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#statut-detail.statut-encours {
+    color: #E99A24 !important;
+    font-size: 16px;
+    font-weight: bold;
 }
