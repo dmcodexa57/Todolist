@@ -5,7 +5,6 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 const cors = require('cors');
 
-
 // =====================================
 // CONFIGURATION SWAGGER
 // =====================================
@@ -16,13 +15,18 @@ const options = {
         info: {
             title: 'Todo List API (Learning campus)',
             version: '1.0.0'
-        }
+        },
+        servers: [
+            {
+                url: 'https://todolist-pied-alpha-78.vercel.app',
+                description: 'API en production sur Vercel'
+            }
+        ]
     },
     apis: ['./app.js']
 };
 
 const openapiSpecification = swaggerJsdoc(options);
-
 
 // =====================================
 // CRÉATION DE L'APPLICATION
@@ -33,13 +37,11 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-
 // =====================================
 // CONFIGURATION SWAGGER UI
 // =====================================
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
-
 
 // =====================================
 // LISTE DES TÂCHES
@@ -115,24 +117,19 @@ const todos = [
     }
 ];
 
-
 // =====================================
 // ROUTE GET : RÉCUPÉRER LES TÂCHES
 // =====================================
 
 app.get('/todos', (req, res) => {
-
     res.status(200).json(todos);
-
 });
-
 
 // =====================================
 // ROUTE POST : CRÉER UNE TÂCHE
 // =====================================
 
 app.post('/todos', (req, res) => {
-
     const newTodo = {
         id: Math.max(0, ...todos[0].todolist.map(t => t.id)) + 1,
         text: req.body.text,
@@ -144,83 +141,62 @@ app.post('/todos', (req, res) => {
     todos[0].todolist.push(newTodo);
 
     res.status(201).json(newTodo);
-
 });
-
 
 // =====================================
 // ROUTE GET : RÉCUPÉRER UNE TÂCHE PAR ID
 // =====================================
 
 app.get('/todos/:id', (req, res) => {
-
     const id = parseInt(req.params.id);
 
     const todo = todos[0].todolist.find(t => t.id === id);
 
     if (!todo) {
-
         return res.status(404).send('Todo not found');
-
     }
 
     res.status(200).json(todo);
-
 });
-
 
 // =====================================
 // ROUTE PUT : MODIFIER UNE TÂCHE
 // =====================================
 
 app.put('/todos/:id', (req, res) => {
-
     const index = todos[0].todolist.findIndex(
         t => t.id == req.params.id
     );
 
     if (index >= 0) {
-
         todos[0].todolist[index] = {
             ...todos[0].todolist[index],
             ...req.body
         };
 
         res.status(200).json(todos[0].todolist[index]);
-
     } else {
-
         res.status(404).send("Todo not found");
-
     }
-
 });
-
 
 // =====================================
 // ROUTE DELETE : SUPPRIMER UNE TÂCHE
 // =====================================
 
 app.delete('/todos/:id', (req, res) => {
-
     const index = todos[0].todolist.findIndex(
         t => t.id == req.params.id
     );
 
     if (index >= 0) {
-
         todos[0].todolist.splice(index, 1);
 
         res.status(200).send("Todo deleted successfully");
-
     } else {
-
         res.status(404).send("Todo not found");
-
     }
-
 });
-
 
 // =====================================
 // EXPORTER L'APPLICATION POUR JEST
@@ -228,17 +204,12 @@ app.delete('/todos/:id', (req, res) => {
 
 module.exports = app;
 
-
 // =====================================
 // DÉMARRER LE SERVEUR
 // =====================================
 
 if (require.main === module) {
-
     app.listen(3000, () => {
-
         console.log('Server is running on http://localhost:3000');
-
     });
-
 }
