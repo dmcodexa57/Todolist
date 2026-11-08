@@ -513,3 +513,83 @@ button:hover {
     font-size: 16px;
     font-weight: bold;
 }
+
+/* PAGE STATISTIQUES */
+
+#statistiques {
+    display: flex;
+    justify-content: center;
+    gap: 55px;
+    max-width: 1000px;
+    margin: 115px auto 0;
+    padding: 0 20px;
+}
+
+.carte-stat {
+    width: 260px;
+    height: 175px;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.carte-stat h2 {
+    margin: 0 0 20px;
+    font-size: 42px;
+    font-weight: bold;
+}
+
+.carte-stat p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: #5C6075;
+}
+
+/* Couleurs des chiffres */
+
+#total-taches {
+    color: #5B45E8;
+}
+
+#taches-terminees {
+    color: #22C55E;
+}
+
+#taches-a-faire {
+    color: #F59E0B;
+}
+
+/* Bouton retour */
+
+#retour-statistiques {
+    width: 160px;
+    height: 45px;
+    margin: 150px 0 30px 30px;
+    font-size: 14px;
+}
+
+/* Responsive */
+
+@media screen and (max-width: 600px) {
+
+    #statistiques {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        margin-top: 50px;
+    }
+
+    .carte-stat {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    #retour-statistiques {
+        margin: 50px 0 30px 30px;
+    }
+}
