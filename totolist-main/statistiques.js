@@ -1,12 +1,16 @@
 
+// =====================================
 // RÉCUPÉRER LES ÉLÉMENTS HTML
+// =====================================
 
 const totalTaches = document.getElementById("total-taches");
 const tachesTerminees = document.getElementById("taches-terminees");
 const tachesAFaire = document.getElementById("taches-a-faire");
 
 
+// =====================================
 // RÉCUPÉRER LES TÂCHES DEPUIS L'API
+// =====================================
 
 fetch("http://localhost:3000/todos")
 
@@ -26,13 +30,17 @@ fetch("http://localhost:3000/todos")
 
         const taches = data[0].todolist;
 
-        // CALCULER LES STATISTIQUES
+        // CALCULER LE TOTAL
 
         const total = taches.length;
+
+        // CALCULER LES TÂCHES TERMINÉES
 
         const terminees = taches.filter(tache => {
             return tache.is_complete === true;
         }).length;
+
+        // CALCULER LES TÂCHES À FAIRE
 
         const aFaire = total - terminees;
 
@@ -55,7 +63,9 @@ fetch("http://localhost:3000/todos")
     });
 
 
+// =====================================
 // BOUTON RETOUR
+// =====================================
 
 const retour = document.getElementById("retour-statistiques");
 

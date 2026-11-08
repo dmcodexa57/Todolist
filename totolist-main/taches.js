@@ -1,19 +1,27 @@
 
+// =====================================
 // RÉCUPÉRER LE PRÉNOM
+// =====================================
 
 let prenom = localStorage.getItem("prenom");
 
 let bienvenue = document.querySelector("#bienvenue");
 
-bienvenue.textContent = "Bonjour " + (prenom || "");
+if (bienvenue) {
+    bienvenue.textContent = "Bonjour " + (prenom || "");
+}
 
 
+// =====================================
 // RÉCUPÉRER LA LISTE DES TÂCHES
+// =====================================
 
 const listeTaches = document.getElementById("taches");
 
 
+// =====================================
 // FONCTION POUR AFFICHER UNE TÂCHE
+// =====================================
 
 function afficherTache(tache) {
 
@@ -66,12 +74,12 @@ function afficherTache(tache) {
 
     bouton.addEventListener("click", function() {
 
-        localStorage.setItem(
-            "tacheSelectionnee",
-            JSON.stringify(tache)
-        );
+       localStorage.setItem(
+    "tacheSelectionnee",
+    JSON.stringify(tache)
+);
 
-        window.location.href = "details.html";
+window.location.href = "details.html?id=" + tache.id;
 
     });
 
@@ -86,7 +94,9 @@ function afficherTache(tache) {
 }
 
 
+// =====================================
 // RÉCUPÉRER LES TÂCHES DEPUIS L'API
+// =====================================
 
 fetch("http://localhost:3000/todos")
 
@@ -104,6 +114,8 @@ fetch("http://localhost:3000/todos")
 
         console.log("Données récupérées :", data);
 
+        listeTaches.innerHTML = "";
+
         data[0].todolist.forEach(tache => {
 
             afficherTache(tache);
@@ -119,7 +131,9 @@ fetch("http://localhost:3000/todos")
     });
 
 
+// =====================================
 // AJOUTER UNE NOUVELLE TÂCHE
+// =====================================
 
 const formulaire = document.getElementById("formulaire-tache");
 
@@ -138,21 +152,68 @@ formulaire.addEventListener("submit", function(event) {
 
     }
 
+    // CRÉER LA TÂCHE
+
     const tache = {
 
         text: texte,
+        Tags: [],
         is_complete: false
 
     };
 
-    afficherTache(tache);
 
-    nouvelleTache.value = "";
+    // ENVOYER LA TÂCHE À L'API
+
+    fetch("http://localhost:3000/todos", {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify(tache)
+
+    })
+
+    .then(response => {
+
+        if (!response.ok) {
+            throw new Error("Erreur lors de l'enregistrement");
+        }
+
+        return response.json();
+
+    })
+
+    .then(data => {
+
+        console.log("Tâche enregistrée :", data);
+
+        // AFFICHER LA TÂCHE ENREGISTRÉE
+
+        afficherTache(data);
+
+        // VIDER LE CHAMP
+
+        nouvelleTache.value = "";
+
+    })
+
+    .catch(error => {
+
+        console.log("Erreur :", error);
+
+        alert("Impossible d'enregistrer la tâche.");
+
+    });
 
 });
 
 
 // BOUTON STATISTIQUES
+
 
 const boutonStatistiques = document.getElementById("voir-statistiques");
 

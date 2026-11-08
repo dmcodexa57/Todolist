@@ -1,38 +1,80 @@
 
-// RÉCUPÉRER LA TÂCHE SÉLECTIONNÉE
+ // =====================================
+ // RÉCUPÉRER L'IDENTIFIANT DANS L'URL
+ // =====================================
 
-let tache = JSON.parse(
-    localStorage.getItem("tacheSelectionnee")
-);
+const parametres = new URLSearchParams(window.location.search);
+const id = parametres.get("id");
 
 
-// VÉRIFIER SI UNE TÂCHE EXISTE
+// =====================================
+// RÉCUPÉRER LES ÉLÉMENTS HTML
+// =====================================
 
-if (!tache) {
+const titreDetail = document.getElementById("titre-detail");
+const statutDetail = document.getElementById("statut-detail");
+const terminer = document.getElementById("terminer-tache");
+const supprimer = document.getElementById("supprimer-tache");
+const retour = document.getElementById("retour-taches");
+
+
+// =====================================
+// VÉRIFIER SI UN IDENTIFIANT EXISTE
+// =====================================
+
+if (!id) {
 
     window.location.href = "taches.html";
 
 } else {
 
-    // RÉCUPÉRER LES ÉLÉMENTS HTML
+    // =====================================
+    // RÉCUPÉRER LA TÂCHE DEPUIS L'API
+    // =====================================
 
-    const titreDetail = document.getElementById("titre-detail");
+    fetch("http://localhost:3000/todos/" + id)
 
-    const statutDetail = document.getElementById("statut-detail");
+        .then(response => {
 
-    const terminer = document.getElementById("terminer-tache");
+            if (!response.ok) {
+                throw new Error("Tâche introuvable");
+            }
 
-    const supprimer = document.getElementById("supprimer-tache");
+            return response.json();
 
-    const retour = document.getElementById("retour-taches");
+        })
+
+        .then(data => {
+
+            tache = data;
+
+            localStorage.setItem(
+                "tacheSelectionnee",
+                JSON.stringify(tache)
+            );
+
+            titreDetail.textContent = tache.text;
+
+            actualiserDetail();
+
+        })
+
+        .catch(error => {
+
+            console.log("Erreur :", error);
+
+            alert("Impossible de récupérer cette tâche.");
+
+            window.location.href = "taches.html";
+
+        });
 
 
-    // AFFICHER LE TITRE
-
-    titreDetail.textContent = tache.text;
-
-
+    // =====================================
     // ACTUALISER LE STATUT
+    // =====================================
+
+    let tache;
 
     function actualiserDetail() {
 
@@ -41,39 +83,85 @@ if (!tache) {
             statutDetail.textContent = "Statut : Terminée";
             statutDetail.className = "statut-termine";
 
-            terminer.disabled = true;
+            terminer.textContent = "Réouvrir la tâche";
 
         } else {
 
             statutDetail.textContent = "Statut : À faire";
             statutDetail.className = "statut-encours";
 
-            terminer.disabled = false;
+            terminer.textContent = "Marquer comme terminée";
 
         }
 
+        terminer.disabled = false;
+
     }
 
-    actualiserDetail();
 
-
-    // BOUTON TERMINER
+    // =====================================
+    // BOUTON TERMINER / RÉOUVRIR
+    // =====================================
 
     terminer.addEventListener("click", function() {
 
-        tache.is_complete = true;
+        const ancienStatut = tache.is_complete;
 
-        localStorage.setItem(
-            "tacheSelectionnee",
-            JSON.stringify(tache)
-        );
+        tache.is_complete = !tache.is_complete;
 
-        actualiserDetail();
+        fetch("http://localhost:3000/todos/" + tache.id, {
+
+            method: "PUT",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify(tache)
+
+        })
+
+        .then(response => {
+
+            if (!response.ok) {
+                throw new Error("Erreur lors de la modification");
+            }
+
+            return response.json();
+
+        })
+
+        .then(data => {
+
+            tache = data;
+
+            localStorage.setItem(
+                "tacheSelectionnee",
+                JSON.stringify(tache)
+            );
+
+            actualiserDetail();
+
+        })
+
+        .catch(error => {
+
+            console.log("Erreur :", error);
+
+            tache.is_complete = ancienStatut;
+
+            actualiserDetail();
+
+            alert("Impossible de modifier la tâche.");
+
+        });
 
     });
 
 
+    // =====================================
     // BOUTON SUPPRIMER
+    // =====================================
 
     supprimer.addEventListener("click", function() {
 
@@ -83,16 +171,40 @@ if (!tache) {
 
         if (confirmation) {
 
-            localStorage.removeItem("tacheSelectionnee");
+            fetch("http://localhost:3000/todos/" + id, {
 
-            window.location.href = "taches.html";
+                method: "DELETE"
+
+            })
+
+            .then(response => {
+
+                if (!response.ok) {
+                    throw new Error("Erreur lors de la suppression");
+                }
+
+                localStorage.removeItem("tacheSelectionnee");
+
+                window.location.href = "taches.html";
+
+            })
+
+            .catch(error => {
+
+                console.log("Erreur :", error);
+
+                alert("Impossible de supprimer la tâche.");
+
+            });
 
         }
 
     });
 
 
+    // =====================================
     // BOUTON RETOUR
+    // =====================================
 
     retour.addEventListener("click", function() {
 
