@@ -1,5 +1,11 @@
 
 // =====================================
+// ADRESSE DE L'API VERCEL
+// =====================================
+
+const API_URL = "https://todolist-pied-alpha-78.vercel.app";
+
+// =====================================
 // RÉCUPÉRER LES ÉLÉMENTS HTML
 // =====================================
 
@@ -7,12 +13,11 @@ const totalTaches = document.getElementById("total-taches");
 const tachesTerminees = document.getElementById("taches-terminees");
 const tachesAFaire = document.getElementById("taches-a-faire");
 
-
 // =====================================
 // RÉCUPÉRER LES TÂCHES DEPUIS L'API
 // =====================================
 
-fetch("http://localhost:3000/todos")
+fetch(API_URL + "/todos")
 
     .then(response => {
 
@@ -61,7 +66,6 @@ fetch("http://localhost:3000/todos")
         tachesAFaire.textContent = "-";
 
     });
-
 
 // =====================================
 // BOUTON RETOUR

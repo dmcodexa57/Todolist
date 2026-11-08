@@ -11,13 +11,14 @@ if (bienvenue) {
     bienvenue.textContent = "Bonjour " + (prenom || "");
 }
 
-
 // =====================================
 // RÉCUPÉRER LA LISTE DES TÂCHES
 // =====================================
 
 const listeTaches = document.getElementById("taches");
 
+// Adresse de l'API Vercel
+const API_URL = "https://todolist-pied-alpha-78.vercel.app";
 
 // =====================================
 // FONCTION POUR AFFICHER UNE TÂCHE
@@ -65,7 +66,6 @@ function afficherTache(tache) {
     element.appendChild(titre);
     element.appendChild(statut);
 
-
     // BOUTON VOIR LES DÉTAILS
 
     const bouton = document.createElement("button");
@@ -74,15 +74,14 @@ function afficherTache(tache) {
 
     bouton.addEventListener("click", function() {
 
-       localStorage.setItem(
-    "tacheSelectionnee",
-    JSON.stringify(tache)
-);
+        localStorage.setItem(
+            "tacheSelectionnee",
+            JSON.stringify(tache)
+        );
 
-window.location.href = "details.html?id=" + tache.id;
+        window.location.href = "details.html?id=" + tache.id;
 
     });
-
 
     // AJOUTER LES ÉLÉMENTS
 
@@ -93,12 +92,11 @@ window.location.href = "details.html?id=" + tache.id;
 
 }
 
-
 // =====================================
 // RÉCUPÉRER LES TÂCHES DEPUIS L'API
 // =====================================
 
-fetch("http://localhost:3000/todos")
+fetch(API_URL + "/todos")
 
     .then(response => {
 
@@ -129,7 +127,6 @@ fetch("http://localhost:3000/todos")
         console.log("Erreur :", error);
 
     });
-
 
 // =====================================
 // AJOUTER UNE NOUVELLE TÂCHE
@@ -162,10 +159,9 @@ formulaire.addEventListener("submit", function(event) {
 
     };
 
-
     // ENVOYER LA TÂCHE À L'API
 
-    fetch("http://localhost:3000/todos", {
+    fetch(API_URL + "/todos", {
 
         method: "POST",
 
@@ -211,9 +207,9 @@ formulaire.addEventListener("submit", function(event) {
 
 });
 
-
+// =====================================
 // BOUTON STATISTIQUES
-
+// =====================================
 
 const boutonStatistiques = document.getElementById("voir-statistiques");
 

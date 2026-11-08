@@ -1,11 +1,16 @@
 
- // =====================================
- // RÉCUPÉRER L'IDENTIFIANT DANS L'URL
- // =====================================
+// =====================================
+// ADRESSE DE L'API VERCEL
+// =====================================
+
+const API_URL = "https://todolist-pied-alpha-78.vercel.app";
+
+// =====================================
+// RÉCUPÉRER L'IDENTIFIANT DANS L'URL
+// =====================================
 
 const parametres = new URLSearchParams(window.location.search);
 const id = parametres.get("id");
-
 
 // =====================================
 // RÉCUPÉRER LES ÉLÉMENTS HTML
@@ -16,7 +21,6 @@ const statutDetail = document.getElementById("statut-detail");
 const terminer = document.getElementById("terminer-tache");
 const supprimer = document.getElementById("supprimer-tache");
 const retour = document.getElementById("retour-taches");
-
 
 // =====================================
 // VÉRIFIER SI UN IDENTIFIANT EXISTE
@@ -32,7 +36,7 @@ if (!id) {
     // RÉCUPÉRER LA TÂCHE DEPUIS L'API
     // =====================================
 
-    fetch("http://localhost:3000/todos/" + id)
+    fetch(API_URL + "/todos/" + id)
 
         .then(response => {
 
@@ -69,7 +73,6 @@ if (!id) {
 
         });
 
-
     // =====================================
     // ACTUALISER LE STATUT
     // =====================================
@@ -98,7 +101,6 @@ if (!id) {
 
     }
 
-
     // =====================================
     // BOUTON TERMINER / RÉOUVRIR
     // =====================================
@@ -109,7 +111,7 @@ if (!id) {
 
         tache.is_complete = !tache.is_complete;
 
-        fetch("http://localhost:3000/todos/" + tache.id, {
+        fetch(API_URL + "/todos/" + tache.id, {
 
             method: "PUT",
 
@@ -158,7 +160,6 @@ if (!id) {
 
     });
 
-
     // =====================================
     // BOUTON SUPPRIMER
     // =====================================
@@ -171,7 +172,7 @@ if (!id) {
 
         if (confirmation) {
 
-            fetch("http://localhost:3000/todos/" + id, {
+            fetch(API_URL + "/todos/" + id, {
 
                 method: "DELETE"
 
@@ -200,7 +201,6 @@ if (!id) {
         }
 
     });
-
 
     // =====================================
     // BOUTON RETOUR

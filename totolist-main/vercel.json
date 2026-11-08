@@ -4,16 +4,25 @@
   "builds": [
     {
       "src": "app.js",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": "node_modules/swagger-ui-dist/**"
-      }
+      "use": "@vercel/node"
+    },
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/todos(?:/.*)?",
       "dest": "app.js"
+    },
+    {
+      "src": "/api-docs(?:/.*)?",
+      "dest": "app.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/$1"
     }
   ]
 }
