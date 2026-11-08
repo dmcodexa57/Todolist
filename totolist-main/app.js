@@ -41,7 +41,11 @@ app.use(bodyParser.json());
 // CONFIGURATION SWAGGER UI
 // =====================================
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
+app.use(
+    '/api-docs',
+    swaggerUi.serve,
+    swaggerUi.setup(openapiSpecification)
+);
 
 // =====================================
 // LISTE DES TÂCHES
@@ -121,6 +125,16 @@ const todos = [
 // ROUTE GET : RÉCUPÉRER LES TÂCHES
 // =====================================
 
+/**
+ * @swagger
+ * /todos:
+ *   get:
+ *     summary: Récupérer toutes les tâches
+ *     responses:
+ *       200:
+ *         description: Liste des tâches récupérée avec succès
+ */
+
 app.get('/todos', (req, res) => {
     res.status(200).json(todos);
 });
@@ -128,6 +142,31 @@ app.get('/todos', (req, res) => {
 // =====================================
 // ROUTE POST : CRÉER UNE TÂCHE
 // =====================================
+
+/**
+ * @swagger
+ * /todos:
+ *   post:
+ *     summary: Créer une nouvelle tâche
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               text:
+ *                 type: string
+ *               Tags:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *               is_complete:
+ *                 type: boolean
+ *     responses:
+ *       201:
+ *         description: Tâche créée avec succès
+ */
 
 app.post('/todos', (req, res) => {
     const newTodo = {
@@ -147,6 +186,24 @@ app.post('/todos', (req, res) => {
 // ROUTE GET : RÉCUPÉRER UNE TÂCHE PAR ID
 // =====================================
 
+/**
+ * @swagger
+ * /todos/{id}:
+ *   get:
+ *     summary: Récupérer une tâche par son identifiant
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Tâche récupérée avec succès
+ *       404:
+ *         description: Tâche introuvable
+ */
+
 app.get('/todos/:id', (req, res) => {
     const id = parseInt(req.params.id);
 
@@ -162,6 +219,39 @@ app.get('/todos/:id', (req, res) => {
 // =====================================
 // ROUTE PUT : MODIFIER UNE TÂCHE
 // =====================================
+
+/**
+ * @swagger
+ * /todos/{id}:
+ *   put:
+ *     summary: Modifier une tâche
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               text:
+ *                 type: string
+ *               Tags:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *               is_complete:
+ *                 type: boolean
+ *     responses:
+ *       200:
+ *         description: Tâche modifiée avec succès
+ *       404:
+ *         description: Tâche introuvable
+ */
 
 app.put('/todos/:id', (req, res) => {
     const index = todos[0].todolist.findIndex(
@@ -183,6 +273,24 @@ app.put('/todos/:id', (req, res) => {
 // =====================================
 // ROUTE DELETE : SUPPRIMER UNE TÂCHE
 // =====================================
+
+/**
+ * @swagger
+ * /todos/{id}:
+ *   delete:
+ *     summary: Supprimer une tâche
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Tâche supprimée avec succès
+ *       404:
+ *         description: Tâche introuvable
+ */
 
 app.delete('/todos/:id', (req, res) => {
     const index = todos[0].todolist.findIndex(
